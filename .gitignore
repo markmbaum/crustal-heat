@@ -1,0 +1,42 @@
+# ------------------------------------------------------------------------------
+# general
+
+# Python
+*.pyc
+__pycache__/
+.ipynb_checkpoints
+
+# Word, Excel backups
+*.xlk
+*.wbk
+
+# MATLAB
+*.m~
+._*
+~$*
+
+# Mac thing
+**/.DS_Store
+
+# Other
+Thumbs.db
+#.git*
+
+# ------------------------------------------------------------------------------
+# specific
+
+# Binary files
+bin/*
+obj/*
+
+# Output files
+out/*
+
+# Makefile configuration
+config.mk
+
+# Keeps
+!**/.keep
+
+# Subproject files
+projects/*

@@ -1,0 +1,45 @@
+#-------------------------------------------------------------------------------
+#grid settings
+
+depth = 8e3
+delz0 = 10
+delzfrac = 1.01
+delzmax = 50
+save_grid = true
+
+#-------------------------------------------------------------------------------
+#model setup and integration settings
+
+tint = 1e5
+tunit = 31557600
+nsnap = 11
+nmaxout = 1e4
+dtfac = 0.75
+
+#-------------------------------------------------------------------------------
+#physical parameters
+
+rho0 = 3000
+c0 = 840
+k0 = 4
+qgeo0 = 0.04
+Tsa = 220
+Tsb = 280
+Tsc = 1
+
+#-------------------------------------------------------------------------------
+#tracker and output settings
+
+rho = false
+c = false
+k = false
+cap = false
+T = true
+dTdz = false
+q = true
+Tmax = false
+Tmin = false
+Ts = true
+qs = false
+t = true
+tsnap = false
