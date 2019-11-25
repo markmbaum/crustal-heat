@@ -20,8 +20,6 @@ Heat::Heat (Grid grid, Settings stgin) :
     this->set_name("heat");
     //turn on silent snapping
     this->set_silent_snap(true);
-    //engage the stable time step selection
-    this->set_prescribe_adapt(true);
 
     //------------------
     //physical variables
@@ -156,9 +154,11 @@ void Heat::ode_fun (double *solin, double *fout) {
     //time derivatives
     for (i=0; i<n; i++)
         dTdt[i] = f_dTdt(q[i], q[i+1], cap[i], delz[i]);
+
+    //printf("%g\n", get_t());
 }
 
-double Heat::prescribe_adapt_dt () {
+double Heat::dt_adapt () {
     return(stg.dtfac*dtmax);
 }
 

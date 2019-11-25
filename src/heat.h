@@ -121,7 +121,7 @@ public:
     void ode_fun (double *solin, double *fout);
 
     //!computes the next time step, based on the maximum diffusivity
-    double prescribe_adapt_dt ();
+    double dt_adapt ();
 
     //------
     //extras

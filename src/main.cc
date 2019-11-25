@@ -29,7 +29,7 @@ int main (int argc, char **argv) {
 
     //integrate
     double tint = stg.tint*stg.tunit;
-    heat.solve_fixed(tint, 1e-12*tint, stg.nsnap, dirout.c_str());
+    heat.solve_adaptive(tint, 1e-12*tint, stg.nsnap, dirout.c_str());
 
     return(0);
 }

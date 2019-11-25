@@ -40,7 +40,7 @@ int main (int argc, char **argv) {
         Heat heat(grid, stg);
         heat.set_name(int_to_string(count));
         //solve
-        heat.solve_fixed(stg.tint*stg.tunit, stg.tint*1e-12, stg.nsnap, dirout.c_str());
+        heat.solve_adaptive(stg.tint*stg.tunit, stg.tint*1e-12, stg.nsnap, dirout.c_str());
         //increment counter
         count++;
         //reduce grid spacing
