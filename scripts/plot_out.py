@@ -55,6 +55,8 @@ for i,v in enumerate(S):
     axs[i].plot(s, -z)
     axs[i].invert_yaxis()
     axs[i].set_xlabel(L[v])
+    if v == 'T':
+        axs[i].plot([273]*len(z), -z, 'k', linewidth=0.5, zorder=-1)
 axs[0].set_ylabel('Depth (m)')
 
 plt.show()

@@ -10,9 +10,17 @@
 
 #include "io.h"
 
+//!class setting up and containing finite-volume grid information
 class Grid {
 public:
 
+    //!constructs
+    /*!
+    \param[in] depth the total depth of the domain (meters)
+    \param[in] delz0 depth of the shallowest cell at the surface (meters)
+    \param[in] delzfrac fraction increase in depth of deeper cell compared to adjacent shallower cell
+    \param[in] delzmax maximum cell depth
+    */
     Grid (double depth, double delz0, double delzfrac, double delzmax);
 
     //!gets number of cells
@@ -21,15 +29,15 @@ public:
     double get_dep () { return(dep); }
     //!gets vector of cell edge coordinates (m)
     const std::vector<double> get_ze () const { return(ze); }
-    //!gets arravectory of cell center coordinates (m)
+    //!gets vector of cell center coordinates (m)
     const std::vector<double> get_zc () const { return(zc); }
-    //!gets arrayvector of  cell width (m)
+    //!gets vector of z cell width (m)
     const std::vector<double> get_delz () const { return(delz); }
-    //!gets arrayvector of  cell widths used for stability calculations (m)
+    //!gets vector of z cell widths used for stability calculations (m)
     const std::vector<double> get_delze () const { return(delze); }
-    //!gets arrayvector of factors for cell edge values
+    //!gets vector of factors for cell edge values
     const std::vector<double> get_vefac () const { return(vefac); }
-    //!gets arrayvector of factors for cell edge gradients
+    //!gets vector of factors for cell edge gradients
     const std::vector<double> get_gefac () const { return(gefac); }
 
     //!writes grid arrays into a directory as binary files

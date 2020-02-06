@@ -26,22 +26,23 @@ Heat::Heat (Grid grid, Settings stgin) :
 
     //density of medium
     for (i=0; i<n; i++) rho.push_back( f_rho(stg.rho0, -zc[i]) );
-    //specific heat of medium
-    for (i=0; i<n; i++) c.push_back( f_c(stg.c0, -zc[i]) );
     //thermal conductivity of medium
     for (i=0; i<n+1; i++) k.push_back( f_k(stg.k0, -ze[i]) );
-    //thermal capacity
-    for (i=0; i<n; i++) cap.push_back( rho[i]*c[i] );
+    //specific heat
+    for (i=0; i<n; i++) c.push_back( f_c(stg.c0, -zc[i]) );
 
+    //thermal capacity
+    cap.resize(n);
     //derivative of moisture w/r/t z
     dTdz.resize(n+1);
     //fluxes
     q.resize(n+1);
 
-    //------------------
-    //initial condition
+    //-----------------------------------
+    //initial temperatures and capacities
 
-    for (i=0; i<n; i++)
+    for (i=0; i<n; i++) {
+        //temperature
         set_sol(i,
             f_geotherm(
                 f_Ts(0, stg.Tsa, stg.Tsb, stg.Tsc),
@@ -50,6 +51,9 @@ Heat::Heat (Grid grid, Settings stgin) :
                 -zc[i]
             )
         );
+        //thermal capacity
+        cap[i] = f_cap(c[i], rho[i], get_sol(i));
+    }
 
     //---------------
     //maximum stable time step
@@ -59,11 +63,11 @@ Heat::Heat (Grid grid, Settings stgin) :
     for (long i=0; i<n+1; i++) {
         //get the appropriate (maximum) capacity
         if ( i == 0 ) {
-            tem = cap[0];
+            tem = c[0]*rho[0];
         } else if ( i == n ) {
-            tem = cap[n-1];
+            tem = c[n-1]*rho[n-1];
         } else {
-            tem = cap[i] > cap[i-1] ? cap[i] : cap[i-1];
+            tem = c[i]*rho[i] > c[i-1]*rho[i-1] ? c[i]*rho[i] : c[i-1]*rho[i-1];
         }
         //compute stable time step
         dt = delze[i]*delze[i]/(2.0*k[i]/tem);
@@ -107,6 +111,15 @@ double Heat::f_c (double c0, double depth) {
     return(
         c0
     );
+}
+
+double Heat::f_cap (double c, double rho, double Tin) {
+    //regular capacity
+    double cap = c*rho;
+    //apparent capacity, if needed
+    if ( fabs(Tin - stg.Tf) <= stg.ahcw/2.0 )
+        cap += stg.LH/stg.ahcw;
+    return(cap);
 }
 
 //------------------------------------------------------------------------------
@@ -153,9 +166,8 @@ void Heat::ode_fun (double *solin, double *fout) {
 
     //time derivatives
     for (i=0; i<n; i++)
-        dTdt[i] = f_dTdt(q[i], q[i+1], cap[i], delz[i]);
+        dTdt[i] = f_dTdt(q[i], q[i+1], f_cap(c[i], rho[i], Tin[i]), delz[i]);
 
-    //printf("%g\n", get_t());
 }
 
 double Heat::dt_adapt () {
@@ -166,6 +178,9 @@ double Heat::dt_adapt () {
 //extras
 
 void Heat::before_solve () {
+	//initialize by taking a zero step
+    this->step(0.0);
+	//write static physical variables
     std::string name = this->get_name();
     std::string dirout = this->get_dirout();
     if ( stg.rho )

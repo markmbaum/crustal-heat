@@ -1,19 +1,19 @@
 #-------------------------------------------------------------------------------
 #grid settings
 
-depth = 5e3
-delz0 = 1
-delzfrac = 1.01
+depth = 1e4
+delz0 = 10
+delzfrac = 1.002
 delzmax = 25
-save_grid = true
+save_grid = false
 
 #-------------------------------------------------------------------------------
 #model setup and integration settings
 
-tint = 1e4
+tint = 2.5e6
 tunit = 31557600
 nsnap = 11
-nmaxout = 1e4
+nmaxout = 250
 dtfac = 0.9
 
 #-------------------------------------------------------------------------------
@@ -21,12 +21,12 @@ dtfac = 0.9
 
 rho0 = 3000
 c0 = 840
-k0 = 1
+k0 = 3
 qgeo0 = 0.04
 Tsa = 220
-Tsb = 285
+Tsb = 290
 Tsc = 1
-LH = 6.68e7
+LH = 66800000
 Tf = 273
 ahcw = 1
 
@@ -37,12 +37,12 @@ rho = false
 c = false
 k = false
 cap = false
-T = true
+T = false
 dTdz = false
-q = true
+q = false
 Tmax = false
-Tmin = false
-Ts = true
+Tmin = true
+Ts = false
 qs = false
 t = true
 tsnap = false

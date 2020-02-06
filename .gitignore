@@ -38,5 +38,5 @@ config.mk
 # Keeps
 !**/.keep
 
-# Subproject files
-projects/*
+# links
+*.lnk

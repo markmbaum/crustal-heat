@@ -11,8 +11,9 @@ cxx=g++ # <--- GNU C++ compiler
 flags= -Wall -Wextra -pedantic -O3 # <--- GNU compiler flags
 #flags=-Wall -O3 # <--- Intel compiler flags
 
-#openmp flag
+#compilation flag for openmp
 omp=-fopenmp
+#omp=-qopenmp
 
 #-------------------------------------------------------------------------------
 #set the path to libode top directory

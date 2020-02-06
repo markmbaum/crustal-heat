@@ -2,6 +2,11 @@
 #define HEAT_H_
 
 //! \file heat.h
+/*!
+\mainpage crustal_heat
+
+This repository provides a class for solving the one-dimensional heat equation with mixed boundary conditions, a temperature at the surface and a geothermal gradient at the bottom. It allows spatially variable thermal properties and time-varying boundary conditions. The class uses finite volumes and a time stepper from [libode](https://github.com/wordsworthgroup/libode). It also chooses its own time step to maximize efficiency. Latent heat can be enabled to simulate freezing and thawing of ground ice/water. The code is useful for efficiently solving the heat equation over wide ranges of physical parameters which require many independent integrations.
+*/
 
 #include <cmath>
 #include <cstdio>
@@ -17,6 +22,7 @@
 //header file for ODE integrator class
 #include "ode_trapz.h"
 
+//!Integrator class for the heat equation
 class Heat : public OdeTrapz {
 
 public:
@@ -50,19 +56,19 @@ public:
     //------------------
     //physical variables
 
-    //static scalar quantities
+    //static quantities
 
     //!density of medium (kg/m^3)
     std::vector<double> rho;
-    //!specific heat of medium (J/kg*K)
-    std::vector<double> c;
     //!thermal conductivity of medium (W/m*K)
     std::vector<double> k;
+    //!specific heat of medium (J/kg*K)
+    std::vector<double> c;
+
+    //varying quantities
+
     //!thermal capacity c*rho (J/m^3*K)
     std::vector<double> cap;
-
-    //dynamic, depth-varying quantities
-
     //!derivative of temperature w/r/t z
     std::vector<double> dTdz;
     //!fluxes
@@ -71,7 +77,7 @@ public:
     //---------------
     //other variables
 
-    //maximum stable time step
+    //!maximum stable time step
     double dtmax;
 
     //--------
@@ -103,6 +109,8 @@ public:
     virtual double f_rho (double rho0, double depth);
     //!medium specific heat over depth (J/kg*K)
     virtual double f_c (double c0, double depth);
+    //!medium thermal capacity
+    virtual double f_cap (double c, double rho, double Tin);
 
     //------------------
     //physical functions

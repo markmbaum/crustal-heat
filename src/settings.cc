@@ -49,6 +49,9 @@ Settings parse_settings ( std::vector< std::vector< std::string > > sv ) {
         else if ( cmp(set, "Tsa") ) s.Tsa = std::atof(val);
         else if ( cmp(set, "Tsb") ) s.Tsb = std::atof(val);
         else if ( cmp(set, "Tsc") ) s.Tsc = std::atof(val);
+        else if ( cmp(set, "LH") ) s.LH = std::atof(val);
+        else if ( cmp(set, "Tf") ) s.Tf = std::atof(val);
+        else if ( cmp(set, "ahcw") ) s.ahcw = std::atof(val);
 
         else if ( cmp(set, "rho") ) s.rho = eval_txt_bool(val);
         else if ( cmp(set, "c") ) s.c = eval_txt_bool(val);
@@ -96,6 +99,9 @@ Settings copy_settings (Settings &b) {
     a.Tsa = b.Tsa;
     a.Tsb = b.Tsb;
     a.Tsc = b.Tsc;
+    a.LH = b.LH;
+    a.Tf = b.Tf;
+    a.ahcw = b.ahcw;
     //trackers and output
     a.rho = b.rho;
     a.c = b.c;

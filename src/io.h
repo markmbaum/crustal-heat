@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iostream>
 
+//!prints a message then exits the program
 void print_exit (const char *msg);
 
 //------------------------------------------------------------------------------

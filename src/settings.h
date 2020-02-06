@@ -9,7 +9,7 @@
 #include <string.h>
 #include <cstdlib>
 
-//!container struct for all the settings variables needed for a BousThermModel run
+//!container struct for all the settings variables needed for crustal heat
 class Settings {
 public:
 
@@ -58,6 +58,16 @@ public:
     double Tsb = 1.0;
     //!third surface temperature parameter
     double Tsc = 1.0;
+    //!latent heat of medium (J/m^3) <--- UNITS!
+    /*!
+        - multiply by porosity for ice/water in pores
+        - use zero to turn latent heat off
+    */
+    double LH = 0.2*1e3*334e3; //porosity of 20 % with water in pores
+    //!melting/freezing point (K)
+    double Tf = 273.0;
+    //!temperature window to apply apparent heat capacity (K)
+    double ahcw = 1.0;
 
     //-------------------------------------
     //trackers and output
@@ -84,9 +94,9 @@ public:
     bool Ts = false;
     //!whether to track surface heat flux
     bool qs = false;
-    //!wheter to track time step times
+    //!whether to track time step times
     bool t = false;
-    //!wheter to track time snap times
+    //!whether to track time snap times
     bool tsnap = false;
 
 };

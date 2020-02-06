@@ -53,6 +53,27 @@ std::vector<double> linspace (double a, double b, long n) {
     return(v);
 }
 
+std::vector<double> logspace (double a, double b, long n) {
+
+    //avoid division by zero
+    if ( n == 1 ) {
+        if ( a != b ) {
+            printf("FAILURE: cannot logspace with a single value if the range limits are not identical");
+            exit(EXIT_FAILURE);
+        }
+        std::vector<double> v(1, pow(10, a));
+        return(v);
+    }
+    //spacing
+    double h = (b - a)/(n - 1);
+    //values
+    std::vector<double> v;
+    for (long i=0; i<n; i++)
+        v.push_back( pow(10, a + i*h) );
+
+    return(v);
+}
+
 std::vector<double> subsample (std::vector<double> v, unsigned long n) {
 
     //calculate the approximate interval size

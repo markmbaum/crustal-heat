@@ -25,6 +25,7 @@ int main (int argc, char **argv) {
     stg.tint = 0.02;
 
     stg.Tsc = 1e-100;
+    stg.LH = 0.0;
     stg.delz0 = 0.025;
     double delzf = 0.0005;
     double frac = 0.75;

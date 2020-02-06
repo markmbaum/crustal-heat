@@ -20,6 +20,9 @@ double interp (double *x, double *y, double xx, long n);
 //!creates an evenly spaced vector of values over a range
 std::vector<double> linspace (double a, double b, long n);
 
+//!create an logarithmically spaced vector of values over a range
+std::vector<double> logspace (double a, double b, long n);
+
 //!subsamples a vector, keeping first and last elements
 /*!
 \param[in] v vector to subsample
