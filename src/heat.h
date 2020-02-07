@@ -5,7 +5,15 @@
 /*!
 \mainpage crustal_heat
 
-This repository provides a class for solving the one-dimensional heat equation with mixed boundary conditions, a temperature at the surface and a geothermal gradient at the bottom. It allows spatially variable thermal properties and time-varying boundary conditions. The class uses finite volumes and a time stepper from [libode](https://github.com/wordsworthgroup/libode). It also chooses its own time step to maximize efficiency. Latent heat can be enabled to simulate freezing and thawing of ground ice/water. The code is useful for efficiently solving the heat equation over wide ranges of physical parameters which require many independent integrations.
+This repository provides a class for solving the one-dimensional heat equation with mixed boundary conditions, a temperature at the surface and a geothermal gradient at the bottom. It allows spatially variable thermal properties and time-varying boundary conditions. The class uses finite volumes and a time stepper from [libode](https://github.com/wordsworthgroup/libode). It also chooses its own time step to maximize efficiency. Latent heat can be enabled to simulate freezing and thawing of ground ice/water. Openmp and the class-based structure of this code make it good for running a large number of independent integrations. Simulating crustal heat transfer over wide ranges of initial conditions and/or physical parameters.
+
+The code runs through three classes/structs. To perform an integration:
+    1. Create a Settings struct by reading values from a text file. An example settings file is included in the repository as settings.txt. The Settings struct contains physical parameters, integration settigns, and grid specifications.
+    2. Create a Grid object using values in the Settings struct or with other specifications.
+    3. Construct a Heat object with your Settings and Grid objects.
+    4. Call one of the Heat object's integrating methods (solve_fixed or solve_adaptive). These are explained in the documentation for [libode](https://github.com/wordsworthgroup/libode). Adaptive solves will choose the time step based on the stability limit of the solver.
+
+An example program for running a single integration is in the main.cc file. A convergence test is run by the main_test.cc program.
 */
 
 #include <cmath>

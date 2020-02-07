@@ -38,5 +38,5 @@ config.mk
 # Keeps
 !**/.keep
 
-# links
+# Links
 *.lnk

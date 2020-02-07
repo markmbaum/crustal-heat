@@ -1,3 +1,5 @@
+//! \file main.cc
+
 #include <string>
 #include <vector>
 #include <iostream>
