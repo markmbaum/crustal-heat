@@ -30,8 +30,7 @@ all: libodemake $(dirb)/libcrustalheat.a $(dirb)/crustal_heat.exe $(dirb)/crusta
 #compilation rules
 
 libodemake:
-	$(MAKE) -C $(odepath)
-
+	cd $(odepath) && make
 
 $(obj): $(diro)/%.o: $(dirs)/%.cc $(dirs)/%.h
 	$(cxx) $(flags) -o $@ -c $< -I$(dirs)
@@ -52,7 +51,6 @@ $(dirb)/crustal_heat.exe: $(dirs)/main.cc $(obj) $(mod)
 
 $(dirb)/crustal_heat_test.exe: $(dirs)/main_test.cc $(obj) $(mod)
 	$(cxx) $(flags) -o $@ $< $(obj) $(mod) -I$(dirs) $(odesrc) $(odelib)
-
 
 
 .PHONY : clean
