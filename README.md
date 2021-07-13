@@ -10,6 +10,6 @@ Used in:
 
 This repository provides a C++ class for solving the one-dimensional heat equation with mixed boundary conditions—prescribed temperature at the surface and geothermal gradient at the bottom—both of which may vary in time. Thermal properties (density, conductivity, specific heat) may also be spatially variable.
 
-The class uses finite volumes and a time stepper from [libode](https://github.com/wordsworthgroup/libode). It automatically uses a time step near the largest stable value (based on thermal properties). Latent heat can be enabled to simulate freezing and thawing of ground ice/water. Openmp and the class-based structure of this code make it useful for running a large number of independent integrations with wide ranges of initial conditions and/or physical parameters.
+The class uses finite volumes and a time stepper from [libode](https://github.com/markmbaum/libode). It automatically uses a time step near the largest stable value (based on thermal properties). Latent heat can be enabled to simulate freezing and thawing of ground ice/water. Openmp and the class-based structure of this code make it useful for running a large number of independent integrations with wide ranges of initial conditions and/or physical parameters.
 
-See the [**documentation**](https://wordsworthgroup.github.io/crustal-heat/) for details with source code.
+See the [**documentation**](https://markmbaum.github.io/crustal-heat/) for details with source code.
